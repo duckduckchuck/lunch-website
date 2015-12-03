@@ -1,34 +1,180 @@
 @import 'reset';
 @import 'variables';
-@import 'grid';
+
+@font-face {
+   font-family: Pressura-Mono;
+   src: url(../font/pressura_mono.otf);
+}
+
+@font-face {
+    font-family: Pressura-Mono;
+    src: url(../font/pressura_mono_bold.otf);
+    font-weight: bold;
+}
+
+$regular: Pressura-Mono, monospace;
+
+body {
+      font: $font-size-large $regular;
+}
 
 #layer {
+/*   height: 100%;*/
+   display: flex;
+/*   justify-content: center;*/
+   flex-direction: column;
+   align-items:center;
    margin: 0 auto;
    max-width: $width-body;
-   padding: {
-      left: (1 * ($grid-width + $grid-gutter));
-      right: (1 * ($grid-width + $grid-gutter));
-   }
+}
+
+.stuff {
+   max-width: 5 * ($grid-width + $grid-gutter) + $grid-width;
+   background-color: $green;
+   padding: 12px 10px 6px 10px;
+   border: 0px;
+   margin-bottom: 48px;
+}
+
+.restaurant {
+   width: (5 * ($grid-width + $grid-gutter) + $grid-width) - 40;
+   background-color: white;
+   margin: 6px 0;
+   padding: 0 10px;
+}
+
+.button {
+   color: white;
+   background-color: $brighter-green;
+   width: (5 * ($grid-width + $grid-gutter) + $grid-width) - 20;
+   height: $leading-large;
+   margin: 6px 0;
+   text-align: center;
+   font-size: $font-size-large;
+   font-weight: bold;
+
+}
+
+.bottom {
+   display: flex;
+   flex-direction: row;
+}
+
+.rsvp {
+   background-color: white;
+   width: 224px;
+   height: 98px;
+   margin: 6px 0;
+}
+
+.yes {
+   background-color: $brighter-green;
+   width: 98px;
+   height: 98px;
+   margin: 6px 5px 0 10px;
+}
+
+.no {
+   background-color: $red;
+   width: 98px;
+   height: 98px;
+   margin: 6px 0 0 5px;
+}
+
+.thoughts {
+   background-color: white;
+   width: (5 * ($grid-width + $grid-gutter) + $grid-width) - 20;
+   height: 98px;
+   margin: 6px 0;
 }
 
 h1 {
-   font-size: 2 * $font-size;   // 32px
-   line-height: 1.5 * $leading; // 36px
-   margin: (.75 * $leading) 0;  // 18px
+   font-size: 5.625 * $font-size;   // 90px
+   line-height: 5.625 * $font-size; // 90px
+   margin: (1 * $leading) 0;        // 48px
+   text-align: center;
+   font-weight: bold;
+   color: $green;
 }
 
 h2 {
-   font-size: 1.5 * $font-size; // 24px
-   line-height: 1.5 * $leading; // 36px
-   margin: (.25 * $leading) 0;  // 6px
+   font-size: $font-size-large;  // 24px
+   line-height: $leading;        // 24px
+   margin: 0 0 24px 0;   // 6px
+   color: $green;
+   font-weight: 400;
 }
 
 h3 {
-   font-size: 1.25 * $font-size;
-   line-height: 2 * $leading;
+   color: white;
+   line-height: $leading;
+   margin: 0 0 12px 0;
+   text-align: center;
 }
 
-p {
+h4 {
+   color: white;
+   line-height: 34px;
+   margin: 15px 0;
+   text-align: center;
+}
+
+p.restaurant-name{
+   font-size: 2.25 * $font-size;
+   color: $brighter-green;
+   line-height: 2 * $leading;
+
+}
+
+p.restaurant-info {
+   font-size: 2.25 * $font-size;
+   color: $green;
+   line-height: 2 * $leading;
+
+}
+
+input {
+   width: (5 * ($grid-width + $grid-gutter) + $grid-width) - 20;
+   border: 0px;
+   margin: 6px 0;
+   padding: 0;
+   height: $leading-large;
+   font: $font-size-large $regular;
+   color: $green;
+}
+
+input[type="submit"] {
+   color: white;
+   background-color: $brighter-green;
+   width: (5 * ($grid-width + $grid-gutter) + $grid-width) - 20;
+   height: $leading-large;
+   margin: 6px 0;
+   text-align: center;
+   font-family: $regular;
+   font-size: $font-size-large;
+   font-weight: bold;
+}
+
+input:focus {
+   outline: none;
+   color: white;
+   background-color: $brighter-green;
+}
+
+.white {
+   color: white;
+   line-height: $leading;
+}
+
+a {
+   text-decoration: none;
+   color: white;
+}
+
+a:focus {
+   outline: none;
+}
+/*p {
    line-height: $leading;
 }
 
@@ -66,3 +212,4 @@ section:nth-of-type(3) {
    max-width: (4 * ($grid-width + $grid-gutter)) + $grid-width;
    padding-right: 0;
 }
+*/

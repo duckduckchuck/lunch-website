@@ -1,5 +1,12 @@
 $font-size: 16px;                                              // 16 pixels
+$font-size-large: 1.5 * $font-size;                            // 24 pixels
 $leading: 1.5 * $font-size;                                    // 24 pixels
-$grid-width: 4.6875 * $font-size;                              // 75 pixels
-$grid-gutter: 1.5625 * $font-size;                             // 25 pixels
-$width-body: (9 * ($grid-width + $grid-gutter)) + $grid-width; // 975 pixels
+$leading-large: 2.25 * $font-size;                             // 36 pixels
+$grid-width: 3.75 * $font-size;                                // 60 pixels
+$grid-gutter: 1.25 * $font-size;                               // 20 pixels
+$width-body: (12 * ($grid-width + $grid-gutter));              // 960 pixels
+
+// colors
+$green: #66FF99;
+$brighter-green: #99FFCC;
+$red: #FF9999;
