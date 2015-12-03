@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS `venue` (
+   `name`     VARCHAR(20) NOT NULL,
+   `id`
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
