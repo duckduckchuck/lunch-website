@@ -130,7 +130,8 @@ tmtags
 # into algebraic long form
 #
 *.s[a-u][a-f]
-*.s[a-u][h-z]
+*.s[a-u][h-k]
+*.s[a-u][m-z]
 *.s[w][a-f]
 *.s[w][h-z]
 
