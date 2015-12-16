@@ -99,13 +99,13 @@ function doesUserExist($username)
         );
 
         $statement = $db -> prepare(
-            "SELECT username FROM user WHERE username = :username"
+            "SELECT email FROM user WHERE email = :email"
         );
 
-        $statement -> execute(array('username' => $username));
+        $statement -> execute(array('email' => $email));
 
         while ($row = $statement -> fetch()) {
-            if ($row['username'] == $username) {
+            if ($row['email'] == $email) {
                 $user_exists = true;
 
                 break;
@@ -138,7 +138,7 @@ function doesUserExist($username)
  * @access public
  * @return void
  */
-function registerNewUser($username, $password)
+function registerNewUser($email, $password)
 {
     try {
         include_once "config.php";
@@ -150,15 +150,16 @@ function registerNewUser($username, $password)
         );
 
         $statement = $connection -> prepare(
-            "INSERT INTO user (username,salt,password) " .
-            "VALUES (:username,:salt,:password)"
+            "INSERT INTO user (email,salt,password,firstname ) " .
+            "VALUES (:email,:salt,:password,:firstname)"
         );
 
         $statement -> execute(
             array(
-                'username' => $username,
+                'email' => $email,
                 'salt'     => $salt,
-                'password' => md5($password . $salt)
+                'password' => md5($password . $salt),
+                'firstname' => $firstname,
             )
         );
 
@@ -185,7 +186,7 @@ function registerNewUser($username, $password)
  * @access public
  * @return bool
  */
-function authenticateUser($username, $password)
+function authenticateUser($email, $password)
 {
     try {
         include_once "config.php";
@@ -197,10 +198,10 @@ function authenticateUser($username, $password)
         $statement = $db -> prepare(
             "SELECT password, salt " .
             "FROM user " .
-            "WHERE username=:username"
+            "WHERE email=:email"
         );
 
-        $statement -> execute(array('username' => $username));
+        $statement -> execute(array('email' => $email));
 
         $row = $statement -> fetch();
 
@@ -236,37 +237,37 @@ function authenticateUser($username, $password)
  * @access pubic
  * @return void
  */
-function insertNewFile($username, $path, $name, $type)
-{
-    try {
-        include_once "config.php";
+// function insertNewFile($username, $path, $name, $type)
+// {
+//     try {
+//         include_once "config.php";
 
-        $connection = new PDO(
-            "mysql:host=".DBHOST.";dbname=".DBNAME, DBUSER, DBPASS
-        );
+//         $connection = new PDO(
+//             "mysql:host=".DBHOST.";dbname=".DBNAME, DBUSER, DBPASS
+//         );
 
-        $statement = $connection -> prepare(
-            "INSERT INTO file (username,path,name,format) " .
-            "VALUES (:username,:path,:name,:format)"
-        );
+//         $statement = $connection -> prepare(
+//             "INSERT INTO file (username,path,name,format) " .
+//             "VALUES (:username,:path,:name,:format)"
+//         );
 
-        $statement -> execute(
-            array(
-                'username' => $username,
-                'path'     => $path,
-                'name'     => $name,
-                'format'   => $type
-            )
-        );
+//         $statement -> execute(
+//             array(
+//                 'username' => $username,
+//                 'path'     => $path,
+//                 'name'     => $name,
+//                 'format'   => $type
+//             )
+//         );
 
-        $statement = null;
-    } catch(PDOException $e) {
-        echo "<div>Error thrown in <code>insertNewFile</code></div>";
-        echo $e -> getMessage();
+//         $statement = null;
+//     } catch(PDOException $e) {
+//         echo "<div>Error thrown in <code>insertNewFile</code></div>";
+//         echo $e -> getMessage();
 
-        exit;
-    }
-}
+//         exit;
+//     }
+// }
 
 /**
  * GET ALL FILE LINKS FOR
@@ -278,42 +279,42 @@ function insertNewFile($username, $path, $name, $type)
  * @access public
  * @return array of name fields from file table representing file names.
  */
-function getAllFileLinksFor($username)
-{
-    try {
-        include_once "config.php";
+// function getAllFileLinksFor($username)
+// {
+//     try {
+//         include_once "config.php";
 
-        $db = new PDO(
-            "mysql:host=".DBHOST.";dbname=".DBNAME, DBUSER, DBPASS
-        );
+//         $db = new PDO(
+//             "mysql:host=".DBHOST.";dbname=".DBNAME, DBUSER, DBPASS
+//         );
 
-        $statement = $db -> prepare(
-            "SELECT name FROM file WHERE username = :username"
-        );
+//         $statement = $db -> prepare(
+//             "SELECT name FROM file WHERE username = :username"
+//         );
 
-        $statement -> execute(array('username' => $username));
+//         $statement -> execute(array('username' => $username));
 
-        $index = 0;
+//         $index = 0;
 
-        while ($row = $statement -> fetch()) {
-            $links[$index++] = $row['name'];
-        }
+//         while ($row = $statement -> fetch()) {
+//             $links[$index++] = $row['name'];
+//         }
 
-        $statement = null;
+//         $statement = null;
 
-        if (!isset($links)) {
-            $links = 0;
-        }
+//         if (!isset($links)) {
+//             $links = 0;
+//         }
 
-        return $links;
+//         return $links;
 
-    } catch(PDOException $e) {
-        echo "<div>Error thrown in <code>getAllFileLinksFor</code></div>";
-        echo $e -> getMessage();
+//     } catch(PDOException $e) {
+//         echo "<div>Error thrown in <code>getAllFileLinksFor</code></div>";
+//         echo $e -> getMessage();
 
-        exit;
-    }
-}
+//         exit;
+//     }
+// }
 
 /**
  * DELETE FILE
@@ -328,7 +329,7 @@ function getAllFileLinksFor($username)
  * @access public
  * @return void
  */
-function deleteFile($filename)
-{
-    unlink($filename);
-}
+// function deleteFile($filename)
+// {
+//     unlink($filename);
+// }
