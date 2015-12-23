@@ -9,4 +9,5 @@ source event.sql;
 source user.sql;
 source venue.sql;
 source display.sql;
+source insert_into.sql;
 
