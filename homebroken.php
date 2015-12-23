@@ -53,7 +53,16 @@ echo "
    </div>
    <div class='bottom'>
       <div class='rsvp'>
-
+for ($user_number = 1; $user_number <= 6; $user_number++){
+         $user_id = select("user_id", "display", "event_id", $index);
+         $firstname = select("firstname", "user", "user_id", $user_number)
+         $rsvp = select_two("$rsvp", "display", "event_id", $index, "user_id", $user_number);
+         if ($rsvp == 1) {
+            echo"<p class='going'>$firstname</p>"
+         } else if ($rsvp == 2) {
+            echo"<p class='not_going'>$firstname</p>"
+         }
+      }
       </div>
       <div class='yes'>
       <h4>I'M<br>GOING</h4>

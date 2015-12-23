@@ -13,13 +13,13 @@
  * @link     https://bitbucket.org/code-warrior/web-app/
  */
 
-session_start();
+// session_start();
 
-if (isset($_SESSION["valid"])) {
-    if (1 == $_SESSION["valid"]) {
-        header("Location: home.php");
-    }
-}
+// if (isset($_SESSION["valid"])) {
+//     if (1 == $_SESSION["valid"]) {
+//         header("Location: home.php");
+//     }
+// }
 
 // if (!isset($_GET['action'])) {
 //     $_GET['action'] = "register";
@@ -55,12 +55,12 @@ require "includes/main.php";
             <div class="stuff">
                 <form action="login.php" method="post">
                     <p class="white">Email</p>
-                    <input type="email" name="email" placeholder="username" required autofocus>
+                    <input type="email" name="email" required autofocus>
                     <p class="white">Password</p>
-                    <input type="password" name="psw" required>
-                </form>
+                    <input type="password" name="password" required>
                 <p><input type="hidden" name="submitted" value="1"></p>
                 <input type="submit" value="Log in">
+                </form>
                 <p class="button"><a href="register.php">Make an Account?</a></p>
             </div>
         </div>

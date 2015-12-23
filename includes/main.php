@@ -35,7 +35,7 @@ function whiteList()
      * type="image">, then you must remember to add “x” and “y” to the
      * following array.
      */
-    $white_list = array("username", "password", "submitted");
+    $white_list = array("email", "password", "firstname", "submitted");
 
     /**
      * $amount_of_form_input_names_found_in_white_list keeps a count of items in the
@@ -75,7 +75,6 @@ function whiteList()
 
     return $validated;
 }
-
 /**
  * DOES USER EXIST
  *
@@ -87,7 +86,7 @@ function whiteList()
  * @access public
  * @return Boolean true returned if $username is found; false otherwise.
  */
-function doesUserExist($username)
+function doesUserExist($email)
 {
     try {
         include_once "config.php";
@@ -138,7 +137,7 @@ function doesUserExist($username)
  * @access public
  * @return void
  */
-function registerNewUser($email, $password)
+function registerNewUser($email, $password, $firstname)
 {
     try {
         include_once "config.php";
@@ -150,7 +149,7 @@ function registerNewUser($email, $password)
         );
 
         $statement = $connection -> prepare(
-            "INSERT INTO user (email,salt,password,firstname ) " .
+            "INSERT INTO user (email,salt,password,firstname) " .
             "VALUES (:email,:salt,:password,:firstname)"
         );
 
@@ -237,37 +236,37 @@ function authenticateUser($email, $password)
  * @access pubic
  * @return void
  */
-// function insertNewFile($username, $path, $name, $type)
-// {
-//     try {
-//         include_once "config.php";
+function insertNewFile($username, $path, $name, $type)
+{
+    try {
+        include_once "config.php";
 
-//         $connection = new PDO(
-//             "mysql:host=".DBHOST.";dbname=".DBNAME, DBUSER, DBPASS
-//         );
+        $connection = new PDO(
+            "mysql:host=".DBHOST.";dbname=".DBNAME, DBUSER, DBPASS
+        );
 
-//         $statement = $connection -> prepare(
-//             "INSERT INTO file (username,path,name,format) " .
-//             "VALUES (:username,:path,:name,:format)"
-//         );
+        $statement = $connection -> prepare(
+            "INSERT INTO file (username,path,name,format) " .
+            "VALUES (:username,:path,:name,:format)"
+        );
 
-//         $statement -> execute(
-//             array(
-//                 'username' => $username,
-//                 'path'     => $path,
-//                 'name'     => $name,
-//                 'format'   => $type
-//             )
-//         );
+        $statement -> execute(
+            array(
+                'username' => $username,
+                'path'     => $path,
+                'name'     => $name,
+                'format'   => $type
+            )
+        );
 
-//         $statement = null;
-//     } catch(PDOException $e) {
-//         echo "<div>Error thrown in <code>insertNewFile</code></div>";
-//         echo $e -> getMessage();
+        $statement = null;
+    } catch(PDOException $e) {
+        echo "<div>Error thrown in <code>insertNewFile</code></div>";
+        echo $e -> getMessage();
 
-//         exit;
-//     }
-// }
+        exit;
+    }
+}
 
 /**
  * GET ALL FILE LINKS FOR
@@ -279,42 +278,42 @@ function authenticateUser($email, $password)
  * @access public
  * @return array of name fields from file table representing file names.
  */
-// function getAllFileLinksFor($username)
-// {
-//     try {
-//         include_once "config.php";
+function getAllFileLinksFor($username)
+{
+    try {
+        include_once "config.php";
 
-//         $db = new PDO(
-//             "mysql:host=".DBHOST.";dbname=".DBNAME, DBUSER, DBPASS
-//         );
+        $db = new PDO(
+            "mysql:host=".DBHOST.";dbname=".DBNAME, DBUSER, DBPASS
+        );
 
-//         $statement = $db -> prepare(
-//             "SELECT name FROM file WHERE username = :username"
-//         );
+        $statement = $db -> prepare(
+            "SELECT name FROM file WHERE username = :username"
+        );
 
-//         $statement -> execute(array('username' => $username));
+        $statement -> execute(array('username' => $username));
 
-//         $index = 0;
+        $index = 0;
 
-//         while ($row = $statement -> fetch()) {
-//             $links[$index++] = $row['name'];
-//         }
+        while ($row = $statement -> fetch()) {
+            $links[$index++] = $row['name'];
+        }
 
-//         $statement = null;
+        $statement = null;
 
-//         if (!isset($links)) {
-//             $links = 0;
-//         }
+        if (!isset($links)) {
+            $links = 0;
+        }
 
-//         return $links;
+        return $links;
 
-//     } catch(PDOException $e) {
-//         echo "<div>Error thrown in <code>getAllFileLinksFor</code></div>";
-//         echo $e -> getMessage();
+    } catch(PDOException $e) {
+        echo "<div>Error thrown in <code>getAllFileLinksFor</code></div>";
+        echo $e -> getMessage();
 
-//         exit;
-//     }
-// }
+        exit;
+    }
+}
 
 /**
  * DELETE FILE
@@ -329,7 +328,7 @@ function authenticateUser($email, $password)
  * @access public
  * @return void
  */
-// function deleteFile($filename)
-// {
-//     unlink($filename);
-// }
+function deleteFile($filename)
+{
+    unlink($filename);
+}

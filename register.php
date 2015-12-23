@@ -12,27 +12,24 @@ if (isset($_POST["submitted"])) {
             // and, both the email and password contain at least one character
             // (this is a redundancy check, since each form variable is marked
             // as “required” in the HTML form),
-            if (0 < strlen($_POST['email']) && 0 < strlen($_POST['password'])) {
+            if (0 < strlen($_POST['email']) && 0 < strlen($_POST['password']) && 0 < strlen($_POST['firstname'])) {
                 // then process the email and password.
 
                 // 1. Remove whitespace surrounding the email.
                 // 2. Convert <, >, ', and " to their respective HTML entities
                 // 3. Handle HTML5 code
                 // 4. Use the UTF-8 character set
-                $email = htmlentities(
-                    trim($_POST['email']), ENT_QUOTES | 'ENT_HTML5', "UTF-8"
-                );
-
+                $email = trim($_POST['email']);
                 $password = trim($_POST['password']);
-
+                $firstname = trim($_POST['firstname']);
 
                 if (!doesUserExist($email)) {
 
-                    registerNewUser($email, $password);
+                    registerNewUser($email, $password, $firstname);
 
                     include_once "includes/register_success.inc";
 
-                    header("Refresh: 5; ./index.php?action=login");
+                    header("Refresh: 5; ./home.php");
                 } else {
                     header("Location: error.php?message_type=registration_error");
                 }
@@ -48,7 +45,7 @@ if (isset($_POST["submitted"])) {
 
 <head>
     <meta charset="utf-8">
-    <title>Column and Baseline Grid</title>
+    <title>Register, Bruh</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -58,15 +55,16 @@ if (isset($_POST["submitted"])) {
       REGISTER!
    </h1>
         <div class="stuff">
-            <form action="login.php" method="post">
+            <form method='post' accept-charset='UTF-8'>
                 <p class="white">Email</p>
                 <input type="email" name="email">
                 <p class="white">Password</p>
                 <input type="password" name="password">
                 <p class="white">First Name</p>
                 <input type="text" name="firstname">
+                <p><input type="hidden" name="submitted" value="1"></p>
+                <p><input type="submit" value="Make an Account!"></p>
             </form>
-                <input type="submit" value="Make an Account!">
         </div>
     </div>
 </body>

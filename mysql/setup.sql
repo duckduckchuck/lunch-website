@@ -8,4 +8,5 @@ GRANT ALL PRIVILEGES ON lunch.* TO 'the_user'@'localhost' IDENTIFIED BY 'the_pas
 source event.sql;
 source user.sql;
 source venue.sql;
+source display.sql;
 

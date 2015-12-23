@@ -65,6 +65,8 @@ body {
    width: 224px;
    height: 98px;
    margin: 6px 0;
+   //padding: 5px 12px;
+   overflow-y: scroll;
 }
 
 .yes {
@@ -131,6 +133,19 @@ p.restaurant-info {
    color: $green;
    line-height: 2 * $leading;
 
+}
+
+p.going {
+   font-size: 24px;
+   padding: 0 12px;
+   color: $brighter-green;
+}
+
+p.not_going{
+   font-size: 24px;
+   padding:0 12px;
+
+   color: $red;
 }
 
 input {
